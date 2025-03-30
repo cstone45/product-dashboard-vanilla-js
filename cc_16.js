@@ -23,13 +23,29 @@ async function fetchProductsAsync() {
     try {
         const res = await fetch (BASE_URL);
         if (!res.ok) {
-            throw handleError();
+            throw new Error(`Error:${res.status}`);
         }
         return await res.course();
     }
     catch(err) {
         console.error('API Fetch Failed:', err.message);
-        throw err;
+        throw handleError(error);
     };
-    displayProducts(products);
+};
+displayProducts();
+
+//Task 4: Display the Products
+async function displayProducts(products) {
+    const container = document.getElementById('#productContainer');
+    try {
+        const products = await getProducts();
+
+        products.slice(0, 5).forEach(product => {
+            const div = document.createElement('div');
+            div.innerHTML = `<h3>${product.name}</h3><p>${product.price}</p><p2>${product.image}</p2>`;
+            container.appendChild(div);
+        });
+    } catch (err) {
+        container.innerHTML = `<p style="color:red;">Failed to load Products: ${err.message}</p>`;
+    }
 };
