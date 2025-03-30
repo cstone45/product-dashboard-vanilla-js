@@ -32,7 +32,7 @@ async function fetchProductsAsync() {
         throw handleError(error);
     };
 };
-displayProducts();
+displayProducts(products);
 
 //Task 4: Display the Products
 async function displayProducts(products) {
@@ -48,4 +48,9 @@ async function displayProducts(products) {
     } catch (err) {
         container.innerHTML = `<p style="color:red;">Failed to load Products: ${err.message}</p>`;
     }
+};
+
+//Task 5: Resusable Error Handler
+async function handleError(error) {
+    console.log(`An error occurred: ${err.message}`);
 };
