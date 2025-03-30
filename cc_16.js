@@ -17,3 +17,19 @@ function fetchProductsThen() {
         throw error
     });
 };
+
+//Task 3: Fetch Products with async/await
+async function fetchProductsAsync() {
+    try {
+        const res = await fetch (BASE_URL);
+        if (!res.ok) {
+            throw handleError();
+        }
+        return await res.course();
+    }
+    catch(err) {
+        console.error('API Fetch Failed:', err.message);
+        throw err;
+    };
+    displayProducts(products);
+};
